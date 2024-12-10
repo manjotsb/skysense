@@ -1,18 +1,22 @@
 'use client';
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Input from "./components/input";
 import Forecast from './components/forecast'
 import DailyInfo from './components/dailyInfo'
 import CurrentInfo from './components/currentinfo'
-import getBackground from "./utils/dynamicBackgound";
-import { Condiment } from "next/font/google";
+import { IoSettingsOutline } from "react-icons/io5";
+import SettingsPopup from './components/settingsPopup'
+import HourlyForecast from './components/hourlyForecast'
+import HorizontallyScrollable from './components/horizontallyScrollable'
+
 
 export default function Home() {
   const [data, setData] = useState<any>({});
   const [location, setLocation] = useState('');
   const [error, setError] = useState('');
+  const [openSettings, setOpenSettings] = useState(false);
 
-  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=7&aqi=yes&alerts=yes`;
+  const url = `http://api.weatherapi.com/v1/forecast.json?key=${process.env.NEXT_PUBLIC_WEATHER_API_KEY}&q=${location}&days=10&aqi=yes&alerts=yes`;
 
   const handleSearch = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -60,18 +64,26 @@ export default function Home() {
 
   const weatherCondition = data.current?.condition?.text || 'default';
 
-  return (
-    <main>
-      {/* BackGround Gradient */}
-      <div className={`flex ${getBackground(weatherCondition)} bg-no-repeat bg-cover flex-col h-fit min-h-screen relative`}>
-          <div className="flex flex-col md:flex-row justify-between items-center p-12">
+  const handleSettingsClick = () => {
+    setOpenSettings((prevVal) => !prevVal);
+  };
 
-            {/* Input and Logo */}
-            <Input handleSearch={handleSearch} setLocation={setLocation} />
-            <h1 className="mb-8 md:mb-0 order-1 text-white py-2 px-4 text-2xl italic font-bold">
-              SkySense
-            </h1>
+  return (
+    <main className={`flex ${getBackground(weatherCondition)} relative bg-no-repeat bg-cover flex-col h-fit min-h-screen`}>
+      {/* BackGround Gradient */}
+      <div className={`flex bg-blackOverlay bg-no-repeat bg-cover flex-col h-fit min-h-screen relative`}>
+
+          {/* Input and Logo */}
+          <div className="flex flex-col md:flex-row justify-between bg-black/25 items-center px-12 py-8 mb-4">
+            <Input handleSearch={handleSearch} setLocation={setLocation}/>
+            <IoSettingsOutline className="order-1 size-8 text-white" onClick={handleSettingsClick}/>
           </div>
+          {/* Settings Popup  */}
+          {openSettings && (
+              <div className="absolute right-5 top-28 z-50">
+                <SettingsPopup/>
+              </div>
+          )}
 
           <div className="flex justify-between mx-10">
             <div className="flex flex-col justify-center items-center">
@@ -79,10 +91,18 @@ export default function Home() {
               <Forecast data={data}/>
             </div>
 
-            <div>
+            <div className="flex flex-col ml-[150px] overflow-hidden">
               <DailyInfo data={data}/>
+              <div className="w-full overflow-hidden my-10">
+                {data.current && (
+                  <h1 className="text-xl mx-2 text-white font-medium">Today At</h1>
+                )}
+                <HorizontallyScrollable className="py-4">
+                  <HourlyForecast data={data}/>
+                </HorizontallyScrollable>
+            </div>
+            </div>
           </div>
-        </div>
       </div>
 
     </main>

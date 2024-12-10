@@ -14,7 +14,7 @@ const CurrentInfo = ({data}) => {
                       ({data.location.country})
                     </h1>
                     <div className="flex">
-                      <h1 className="text-white text-9xl"> {data.current.temp_c}</h1>
+                      <h1 className="text-white text-9xl">{data.current?.temp_c}</h1>
                       <h1 className="text-white text-9xl">°</h1>
                     <div/>
                   </div>

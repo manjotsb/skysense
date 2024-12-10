@@ -35,40 +35,41 @@ const DailyInfo = ({data}) => {
     // const aqi = data.current ? showAqi(data) : { rating: "Not Found", color: "bg-gray-400"};
     return(
         <main>
-            <div className="flex flex-col justify-center items-center bg-white/25 px-10 rounded-2xl transform scale-[0.9]">
+            <div className="flex flex-col items-center rounded-2xl transform scale-[0.9] text-white bg-black/25 min-w-[900px]">
                 {data.current && (
                     <main>
                         <h1 className="text-xl py-4 font-medium">Today's Highlights</h1>
+
                         {/* Upper 2 Boxes  */}
                         <div className="flex justify-between items-center">
 
                             {/* Air Quality Index  */}
-                            <div className="bg-white/25 p-4 rounded-xl mr-5">
+                            <div className="bg-black/25 p-4 rounded-xl mr-5">
                                 <div className="flex justify-between">
                                     <h1>
                                         Air Quality Index
                                     </h1>
-                                    <h1 className={`${showAqi(data).color} px-3 py-0.5 rounded-3xl`}>
+                                    <h1 className={`${showAqi(data).color} px-3 py-0.5 text-black rounded-3xl`}>
                                         {showAqi(data).rating}
                                     </h1>
                                 </div>
                                 <div className="flex pt-10">
                                     <LuWind className="mt-2 size-8"/>
                                     <div className="flex flex-col items-center mx-5">
-                                        <p className="text-black/50 text-sm">PM 2.5</p>
+                                        <p className="text-white/50 text-sm">PM 2.5</p>
                                         <p className="text-2xl ">{data.current.air_quality.pm2_5}</p>
                                     </div>
                                     <div className="flex flex-col items-center mx-5">
-                                        <p className="text-black/50 text-sm">PM 10</p>
+                                        <p className="text-white/50 text-sm">PM 10</p>
                                         <p className="text-2xl">{data.current.air_quality.pm10}</p>
                                     </div>
                                     <div className="flex flex-col items-center mx-5">
-                                        <p className="text-black/50 text-sm">SO2</p>
+                                        <p className="text-white/50 text-sm">SO2</p>
                                         <p className="text-2xl">{data.current.air_quality.so2}</p>
                                     </div>
 
                                     <div className="flex flex-col items-center mx-5">
-                                        <p className="text-black/50 text-sm">NO2</p>
+                                        <p className="text-white/50 text-sm">NO2</p>
                                         <p className="text-2xl">{data.current.air_quality.no2}</p>
                                     </div>
 
@@ -77,7 +78,7 @@ const DailyInfo = ({data}) => {
                             </div>
 
                             {/* Sunset And Sunrise  */}
-                            <div className="bg-white/25 p-4 rounded-xl">
+                            <div className="bg-black/25 p-4 rounded-xl">
                                 <h1 className="mb-7 mt-1">
                                     Sunrise & Sunset
                                 </h1>
@@ -94,10 +95,10 @@ const DailyInfo = ({data}) => {
                             </div>
                         </div>
                         {/* Bottom 4 Boxes  */}
-                        <div className="flex  my-6 items-center justify-between">
+                        <div className="flex my-6 items-center justify-between">
 
                             {/* Humidity  */}
-                            <div className="bg-white/25 p-4 rounded-xl">
+                            <div className="bg-black/25 p-4 rounded-xl">
                                 <h1>
                                     Humidity
                                 </h1>
@@ -110,7 +111,7 @@ const DailyInfo = ({data}) => {
                             </div>
 
                             {/* Pressure  */}
-                            <div className="bg-white/25 p-4 rounded-xl">
+                            <div className="bg-black/25 p-4 rounded-xl">
                                 <h1>
                                     Pressure
                                 </h1>
@@ -123,7 +124,7 @@ const DailyInfo = ({data}) => {
                             </div>
 
                             {/* Visibility  */}
-                            <div className="bg-white/25 p-4 rounded-xl">
+                            <div className="bg-black/25 p-4 rounded-xl">
                                 <h1>
                                     Visibility
                                 </h1>
@@ -134,7 +135,7 @@ const DailyInfo = ({data}) => {
                                     </h1>
                                 </div>
                             </div>
-                            <div className="bg-white/25 p-4 rounded-xl">
+                            <div className="bg-black/25 p-4 rounded-xl">
                                 <h1>
                                     Feels Like
                                 </h1>

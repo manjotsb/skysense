@@ -22,8 +22,21 @@ module.exports = {
         thunderStormImg: "url('../app/assets/thunderstorm.jpg')",
         mistImg: "url('../app/assets/mist.jpeg')",
         defaultImg: "url('../app/assets/default.jpeg')",
+        blackOverlay:"linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.35) 30%)",
       }
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.no-scrollbar': {
+          'scrollbar-width': 'none', /* Firefox */
+          '-ms-overflow-style': 'none', /* Internet Explorer */
+        },
+        '.no-scrollbar::-webkit-scrollbar': {
+          display: 'none', /* Safari and Chrome */
+        },
+      }, ['responsive', 'hover']);
+    },
+  ],
 };
