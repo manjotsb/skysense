@@ -20,7 +20,7 @@ const HorizontallyScrollable =({children, className=''}) => {
         }
 
         window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseup', handleMouseSUp);
+        window.addEventListener('mouseup', handleMouseUp);
     }
 
     return (
